@@ -1,2 +1,0 @@
-# WorkWithReact
-Created with CodeSandbox
