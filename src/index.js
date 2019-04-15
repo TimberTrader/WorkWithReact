@@ -2,32 +2,28 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-class WalkDogTodoItem extends React.Component {
+import tasks from "./tasks.json";
+
+class TodoTaskItem extends React.Component {
   render() {
     return (
       <tr>
-        <td>Walk Dog</td>
+        <td>{this.props.taskName}</td>
         <td>
-          <input type="checkbox" />
+          <input type="checkbox" defaultChecked={this.props.finished} />
         </td>
       </tr>
     );
   }
 }
-class BuyBreadTodoItem extends React.Component {
-  render() {
-    return (
-      <tr>
-        <td>Buy Bread</td>
-        <td>
-          <input type="checkbox" />
-        </td>
-      </tr>
-    );
-  }
-}
+
 class TodoList extends React.Component {
   render() {
+    const tasksItems = this.props.tasks.map(taskObj => {
+      return (
+        <TodoTaskItem taskName={taskObj.taskName} finished={taskObj.finished} />
+      );
+    });
     return (
       <div className="container">
         <h1>
@@ -41,14 +37,11 @@ class TodoList extends React.Component {
               <td>Done?</td>
             </tr>
           </thead>
-          <tbody>
-            <WalkDogTodoItem />
-            <BuyBreadTodoItem />
-          </tbody>
+          <tbody>{tasksItems}</tbody>
         </table>
       </div>
     );
   }
 }
 
-ReactDOM.render(<TodoList />, root);
+ReactDOM.render(<TodoList tasks={tasks} />, root);
